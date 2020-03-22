@@ -165,7 +165,7 @@ func (e Entry) printMessage() {
 	if e.Level > CurrentLevel {
 		return
 	}
-	_, file, line, _ := runtime.Caller(2)
+	_, file, line, _ := runtime.Caller(3)
 	fmt.Fprintf(outpout, "%s%s%s %s %s %s:%v‣%s %s\n",
 		e.Level.color(),
 		e.Level,
