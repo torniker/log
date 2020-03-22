@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"runtime"
 	"strings"
 	"time"
 )
@@ -164,13 +165,15 @@ func (e Entry) printMessage() {
 	if e.Level > CurrentLevel {
 		return
 	}
-
-	fmt.Fprintf(outpout, "%s%s%s %s %s‣%s %s\n",
+	_, file, line, _ := runtime.Caller(1)
+	fmt.Fprintf(outpout, "%s%s%s %s %s %s:%s‣%s %s\n",
 		e.Level.color(),
 		e.Level,
 		DefaultColor,
 		time.Now().Format(timeLayout),
 		e.Level.color(),
+		file,
+		line,
 		DefaultColor,
 		e.Message,
 	)
